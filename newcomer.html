@@ -32,25 +32,28 @@
     a LOT of engine specific things if you want to become a scripter in Roblox, such as what's a <b id="lang">Vector3</b>, <b id="lang">CFrame</b>, <b id="lang">:GetChildren()</b>, and so on. Don't be afraid to look at the official <a href="https://create.roblox.com/docs/reference/engine">documentation</a>.<br>
     Hell, go ahead and watch youtube tutorials to get a general idea of whatever new concept you're trying to grasp. Have Claude, ChatGPT, or Gemini tutor you. Whatever works best for you, learn from <b>that.</b></p>
 
-    <h2>First Steps</h2>
+    <h2>Variable Types</h2>
     <p>Before we start writing actual code, you need to understand all the types of variables you have to your disposal so everything makes sense later on.<br>
     Lua has 8 types of variables. A variable stores information. You can declare local variables through typing</p>
     <pre><code class="Luau">local VariableName = VariableData</code></pre>
     <p>A <b>number</b> is a number.</p>
 <pre><code class="Luau">local a = 1
 local b = 15.5 -- You can also add a period to give more precision / make it a decimal number. This one is referred to as a float.
+local c = 2 + 2 -- Math operations are a thing. This will become 4.
 </code></pre>
     <p>A <b>string</b> is a string of characters between quotation marks. Numbers in this context are treated like text.</p>
 <pre><code class="Luau">local a = "did you know this isnt the only way you can declare strings"
 local b = 'you can also use this style of "quotation" marks' -- This is a thing in order to prevent issues where a string contains another quotation mark of the same type. You wouldn't know either where the string actually ends.
 local c = "1" -- Math operations in some cases will work as they for that operation get automatically converted to a number, however I would personally refrain from operating on strings for math.</code></pre>
 
-    <p>A <b>nil</b> represents nothingness. Yes, nothing. We will discuss later how it can be useful.</p>
-<pre><code class="Luau">local a = nil</code></pre>
+    <p>A <b>nil</b> represents nothing.</p>
+<pre><code class="Luau">local a = nil -- It can be used in situations where, for example, it's necessary that you first declare a variable then change it accordingly.
+local b -- This is another way to declare a nil variable.
+</code></pre>
 
     <p>A <b>boolean</b> represents <b id="lang">true</b> or <b id="lang">false</b>. Alternatively, true is 1 and false is nil.</p>
 <pre><code class="Luau">local a = true
-local b = false -- Zero will evaluate to true which is not true in context of false, therefore false is really nil instead of a 0 unlike in many other programming languages.</code></pre>
+local b = false -- Zero will evaluate to true which shouldn't happen in context of false, therefore false is really nil instead of a 0 unlike in many other programming languages.</code></pre>
 
     <p>A <b>table</b> is a collection of multiple variables. Each entry has a <b>key</b> and <b>value</b>. The key defines the "identifier" of the value by which you can access it, whereas the value is simply the held variable.<br>
     The key can be anything (for the most part), you can manually define one. If you don't, the next available number will be assigned by default instead.</p>
@@ -64,7 +67,7 @@ local b = false -- Zero will evaluate to true which is not true in context of fa
     end,
 }
 
-print(a.hello) -- prints 91</code></pre>
+print(a.hello) -- prints 91 / This is one way to get the value from a key.</code></pre>
 
     <p>A <b>function</b> represents a function. It can accept <b>arguments</b> which allow for great flexibility. It can return processed arguments with <b id="lang">return</b>.<br>
     This is especially useful if you need to repeat something multiple times in order to avoid harder to maintain and generally unreadable code.</p>
@@ -77,12 +80,43 @@ print(pow(2, 5)) -- prints 32</code></pre>
 
     <p>There are 2 other types. <b>Userdata</b> and <b>threads</b>. I will skip them, as for now you don't necessarily need to know what those are. Sorry not sorry.</p>
 
+    <h2>First Steps</h2>
+
     <p>Open up Roblox Studio and create a new script anywhere. Most often you'll put one inside ServersideScriptService.<br>
-    Let's begin by writing a very simple line of code.</p>
+    Let's learn some fundamentals.</p>
 
-    <pre><code class="Luau">print("Goodbye, World!")</code></pre>
+    <p><b id="lang">print</b>, as demonstrated earlier, allows you to print whatever. You can directly insert a string, and it will print a string. You can directly insert a number, and it will print the number. You'll mostly use for checking if everything is alright or for debugging purposes.<br></p>
 
-    <p><b id="lang">print</b> allows you to print whatever</p>
+    <pre><code class="Luau">print("Goodbye, World!") -- prints Goodbye, World!
+
+local a = 1
+local b = "hello"
+local tab = {'hi', 'yup'}
+print(a) -- prints 1
+print(b) -- prints hello
+print(tab) -- prints {'hi', 'yup'}. You might need to expand it to see it properly in the output tab. If you print this from an argument, you won't get the table's contents printed, but instead the memory address of the table, ex. 0x7ffe5367e044.
+</code></pre>
+
+    <p>Let's do something with a part. Go ahead and insert one into your place. Rename it to whatever you want or "kevin" if you want to very strictly abide by the next instructions.<br>
+    Let's now get the part into a variable. <b id="lang">game.Workspace</b> or simply <b id="lang">workspace</b>'s general purpose is holding parts that will be physically present in your game.</p>
+
+    <pre><code class="Luau">local part = workspace.kevin</code></pre>
+
+    <p>Let's make it invisible. You can change the properties through things by accessing them in the following manner. <b>Keep proper capitalisation in mind, otherwise the script might error.</b></p>
+
+    <pre><code class="Luau">local part = workspace.kevin
+part.Transparency = 1
+
+-- You don't need to operate on the part through a variable. You can also operate on the part directly.
+-- workspace.kevin.Transparency = 1</code></pre>
+
+    <p>Now run the game, and it should look like it's gone. It's still there, just invisible. You can modify other properties in a similar fashion. Let's now paint it red and make it move by 5 studs along the Z axis in game.</p>
+
+    <pre><code class="Luau">local part = workspace.kevin
+part.Color = Color3.fromRGB(255, 0, 0)
+part.Position = part.Position + Vector3.new(0, 0, 5) -- It's a good time to mention that you don't have to type all that. You can also do part.Position += something or part.Position -= something. Same goes with variables and other things that involve numbers.</code></pre>
+
+    <p>You get the gist. Some properties will need a unique way to be handled as shown in this example. Refer to Google or documentation.</p>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
