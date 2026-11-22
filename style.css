@@ -1,0 +1,45 @@
+body {
+  background-color: #212529;
+}
+
+h1{
+    color: #e9ecef;
+    font-family: "Source Sans 3";
+}
+
+h2{
+    color: #e9ecef;
+    font-family: "Source Sans 3";
+}
+
+p{
+    color: #dee2e6;
+    font-family: "Source Sans 3";
+    font-size: 17px;
+}
+
+button{
+    font-family: "Source Sans 3";
+    font-size: 17px;
+    border-color: #6c757d;
+    height: 30px;
+    border-style: ridge;
+    background: none;
+    color: #dee2e6;
+    margin-bottom: 20px;
+    transition: 0.2s;
+}
+
+button:hover{
+    cursor: pointer;
+    color: black;
+    background: #dee2e6;
+}
+
+a{
+    color: #5e94cc;
+}
+
+#lang{
+    color: #fbba72;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Luau Guidebook</title>
+    <meta name="author" content="sunrvtcxn">
+    <meta name="description" content="lalalalala">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/atom-one-dark.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Newcomer</h1>
+
+    <p>Whether you are new to and curious about programming or you simply hate yourself, I will first explain to you what Luau is.<br>
+    If you don't care enough, feel free to skip this section. I don't care. I am not here to judge you.</p>
+    <br>
+
+    <h2>Roots of Luau / What it is</h2>
+    <p>The Luau you know is a version of <a href="https://www.lua.org/">Lua</a> 5.1 built upon by Roblox Corporation, which has more features and is faster. Lua was made in Rio de Janeiro / Brazil by the Pontifical Catholic University and is currently being maintained by a team there.<br>
+    It was designed as a language meant to be efficient, lightweight, embeddable. Hence why many games like <a href="https://store.steampowered.com/app/4000/Garrys_Mod/">Garry's Mod</a> or programs like <a href="https://obsproject.com/">OBS Studio</a> have plugins / mods with Lua. It's convenient, don't you think?<br>
+    <br>
+    Luau is backwards-compatible with Lua. This means that most of any code written in Lua will run in a Luau environment. This however doesn't mean that any code written in Luau will necessarily run in a Lua environment,<br>
+    such as in situations where you use <b id="lang">table.find</b>. That doesn't exist in Lua. Additionally, a lot of functions from Lua which may be risky to keep, such as ones which operate on files, are removed in Luau for security reasons.
+    </p>
+    <p>Let's get this straight: mastery of Lua alone won't make you a god in scripting in Roblox Studio. It's around 50% engine specific methods/functions and around 50% actual Luau code. You will need to learn<br>
+    a LOT of engine specific things if you want to become a scripter in Roblox, such as what's a <b id="lang">Vector3</b>, <b id="lang">CFrame</b>, <b id="lang">:GetChildren()</b>, and so on. Don't be afraid to look at the official <a href="https://create.roblox.com/docs/reference/engine">documentation</a>.<br>
+    Hell, go ahead and watch youtube tutorials to get a general idea of whatever new concept you're trying to grasp. Have Claude, ChatGPT, or Gemini tutor you. Whatever works best for you, learn from <b>that.</b></p>
+
+    <h2>First Steps</h2>
+    <p>Before we start writing actual code, you need to understand all the types of variables you have to your disposal so everything makes sense later on.<br>
+    Lua has 8 types of variables. A variable stores information. You can declare local variables through typing</p>
+    <pre><code class="Luau">local VariableName = VariableData</code></pre>
+    <p>A <b>number</b> is a number.</p>
+<pre><code class="Luau">local a = 1
+local b = 15.5 -- You can also add a period to give more precision / make it a decimal number. This one is referred to as a float.
+</code></pre>
+    <p>A <b>string</b> is a string of characters between quotation marks. Numbers in this context are treated like text.</p>
+<pre><code class="Luau">local a = "did you know this isnt the only way you can declare strings"
+local b = 'you can also use this style of "quotation" marks' -- This is a thing in order to prevent issues where a string contains another quotation mark of the same type. You wouldn't know either where the string actually ends.
+local c = "1" -- Math operations in some cases will work as they for that operation get automatically converted to a number, however I would personally refrain from operating on strings for math.</code></pre>
+
+    <p>A <b>nil</b> represents nothingness. Yes, nothing. We will discuss later how it can be useful.</p>
+<pre><code class="Luau">local a = nil</code></pre>
+
+    <p>A <b>boolean</b> represents <b id="lang">true</b> or <b id="lang">false</b>. Alternatively, true is 1 and false is nil.</p>
+<pre><code class="Luau">local a = true
+local b = false -- Zero will evaluate to true which is not true in context of false, therefore false is really nil instead of a 0 unlike in many other programming languages.</code></pre>
+
+    <p>A <b>table</b> is a collection of multiple variables. Each entry has a <b>key</b> and <b>value</b>. The key defines the "identifier" of the value by which you can access it, whereas the value is simply the held variable.<br>
+    The key can be anything (for the most part), you can manually define one. If you don't, the next available number will be assigned by default instead.</p>
+<pre><code class="Luau">local a = {
+    [1] = 'kevin',
+    ['hello'] = 91,
+    'apple',
+    {'tables inside tables can exist btw'},
+    function()
+        print("even functions!")
+    end,
+}
+
+print(a.hello) -- prints 91</code></pre>
+
+    <p>A <b>function</b> represents a function. It can accept <b>arguments</b> which allow for great flexibility. It can return processed arguments with <b id="lang">return</b>.<br>
+    This is especially useful if you need to repeat something multiple times in order to avoid harder to maintain and generally unreadable code.</p>
+
+<pre><code class="Luau">local function pow(num, amount)
+    return math.pow(num, amount)
+end -- This is a very useless function, but I'm just using this as a demonstration.
+
+print(pow(2, 5)) -- prints 32</code></pre>
+
+    <p>There are 2 other types. <b>Userdata</b> and <b>threads</b>. I will skip them, as for now you don't necessarily need to know what those are. Sorry not sorry.</p>
+
+    <p>Open up Roblox Studio and create a new script anywhere. Most often you'll put one inside ServersideScriptService.<br>
+    Let's begin by writing a very simple line of code.</p>
+
+    <pre><code class="Luau">print("Goodbye, World!")</code></pre>
+
+    <p><b id="lang">print</b> allows you to print whatever</p>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
