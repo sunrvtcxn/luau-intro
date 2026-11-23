@@ -53,7 +53,8 @@ local b -- This is another way to declare a nil variable.
 
     <p>A <b>boolean</b> represents <b id="lang">true</b> or <b id="lang">false</b>. Alternatively, true is 1 and false is nil.</p>
 <pre><code class="Luau">local a = true
-local b = false -- Zero will evaluate to true which shouldn't happen in context of false, therefore false is really nil instead of a 0 unlike in many other programming languages.</code></pre>
+local b = false -- Zero will evaluate to true which shouldn't happen in context of false, therefore false is really nil instead of a 0 unlike in many other programming languages.
+local c = 2 < 5 -- They can also come from comparisons. This will evaluate to true, as 2 is smaller than 5.</code></pre>
 
     <p>A <b>table</b> is a collection of multiple variables. Each entry has a <b>key</b> and <b>value</b>. The key defines the "identifier" of the value by which you can access it, whereas the value is simply the held variable.<br>
     The key can be anything (for the most part), you can manually define one. If you don't, the next available number will be assigned by default instead.</p>
@@ -78,7 +79,7 @@ end -- This is a very useless function, but I'm just using this as a demonstrati
 
 print(pow(2, 5)) -- prints 32</code></pre>
 
-    <p>There are 2 other types. <b>Userdata</b> and <b>threads</b>. I will skip them, as for now you don't necessarily need to know what those are. Sorry not sorry.</p>
+    <p>There are 2 other types. <b>Userdata</b> and <b>threads</b>. I will skip them, as for now you don't necessarily need to know what those are.</p>
 
     <h2>First Steps</h2>
 
@@ -108,7 +109,7 @@ print(tab) -- prints {'hi', 'yup'}. You might need to expand it to see it proper
 part.Transparency = 1
 
 -- You don't need to operate on the part through a variable. You can also operate on the part directly.
--- workspace.kevin.Transparency = 1</code></pre>
+workspace.kevin.Transparency = 1</code></pre>
 
     <p>Now run the game, and it should look like it's gone. It's still there, just invisible. You can modify other properties in a similar fashion. Let's now paint it red and make it move by 5 studs along the Z axis in game.</p>
 
@@ -117,6 +118,42 @@ part.Color = Color3.fromRGB(255, 0, 0)
 part.Position = part.Position + Vector3.new(0, 0, 5) -- It's a good time to mention that you don't have to type all that. You can also do part.Position += something or part.Position -= something. Same goes with variables and other things that involve numbers.</code></pre>
 
     <p>You get the gist. Some properties will need a unique way to be handled as shown in this example. Refer to Google or documentation.</p>
+
+<p>An if statement only executes certain code if specific conditions are met.</p>
+
+<pre><code class="Luau">local a = 1
+if a == 1 then
+   print("yes!")
+end</code></pre>
+
+<p>You wouldn't want to have 5 if statements, so we can use <b id="lang>and</b> & <b id="lang">or</b> in the event of multiple conditions.</p>
+
+<pre><code class="Luau">local a = 1
+local b = 3
+local c = true
+if a == 1 and b == 3 or c == true then
+   print("yes!")
+end</code></pre>
+
+<p>Let's now make the part change colours continuously like at a disco. We can use a for loop. A for loop repeats a line of code a certain amount of times.</p>
+
+<pre><code class="Luau">for i = 1, 5 do
+   workspace.kevin.Color = Color3.fromRGB(255, 0, 0)
+   workspace.kevin.Color = Color3.fromRGB(0, 255, 0)
+   workspace.kevin.Color = Color3.fromRGB(255, 0, 0)
+end</code></pre>
+
+<p>Now let's run the script and..
+ nothing happens. That's because the script already finished executing. To see visible changes, you'll need to add some sort of throttle. We can use <b id="lang">task.wait(seconds)</b> to wait before continuing execution</p>
+
+<pre><code class="Luau">for i = 1, 5 do
+   workspace.kevin.Color = Color3.fromRGB(255, 0, 0)
+   task.wait(0.5)
+   workspace.kevin.Color = Color3.fromRGB(0, 255, 0)
+   task.wait(0.5)
+   workspace.kevin.Color = Color3.fromRGB(255, 0, 0)
+   task.wait(0.5)
+end</code></pre>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
